@@ -107,7 +107,6 @@ services:
         read_only: true
     networks:
       - elk-stack
-      - host
     depends_on:
       - elasticsearch
 
@@ -117,7 +116,5 @@ volumes:
 
 networks:
   elk-stack:
-    external: true
-  host:
     external: true
     
