@@ -84,7 +84,7 @@ services:
       args:
         ELK_VERSION: $ELK_VERSION
     network_mode: host
-    command: metricbeat -e -E output.elasticsearch.hosts=["elasticsearch:9200"]
+    command: metricbeat --strict-perms=false -e -E output.elasticsearch.hosts=["elasticsearch:9200"]
     volumes: 
       - type: bind
         source: ./metricbeat/metricbeat.docker.yml
