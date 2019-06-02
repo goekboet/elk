@@ -83,5 +83,5 @@ volumes:
 
 networks:
   elk-stack:
-    name: elk-stack
+    external: true
     
