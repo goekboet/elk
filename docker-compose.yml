@@ -1,0 +1,87 @@
+version: '3.7'
+services:
+  elasticsearch:
+    build:
+      context: elasticsearch/
+      args:
+        ELK_VERSION: $ELK_VERSION
+      labels:
+        co.elastic.logs/module: "elasticsearch"
+    volumes:
+      - type: bind
+        source: ./elasticsearch/config/elasticsearch.yml
+        target: /usr/share/elasticsearch/config/elasticsearch.yml
+        read_only: true
+      - type: volume
+        source: elasticsearch
+        target: /usr/share/elasticsearch/data 
+    expose:
+      - "9200"
+    environment:
+      ES_JAVA_OPTS: "-Xmx256m -Xms256m"
+    networks:
+      - elk-stack
+
+  kibana:
+    build:
+      context: kibana/
+      args:
+        ELK_VERSION: $ELK_VERSION
+    labels:
+        co.elastic.logs/module: "kibana"
+    volumes:
+      - type: bind
+        source: ./kibana/config
+        target: /usr/share/kibana/config
+        read_only: true
+    expose:
+      - "5601"
+    networks:
+      - elk-stack
+    depends_on:
+      - elasticsearch
+
+  filebeat:
+    user: root
+    build: 
+      context: filebeat
+      args:
+        ELK_VERSION: $ELK_VERSION
+    command: filebeat -e -strict.perms=false -E output.elasticsearch.hosts=["elasticsearch:9200"]
+    volumes: 
+      - type: bind
+        source: ./filebeat/filebeat.docker.yml
+        target: /usr/share/filebeat/filebeat.yml
+        read_only: true
+      - type: bind
+        source: ./filebeat/modules.d
+        target: /usr/share/filebeat/modules.d
+        read_only: true
+      - type: bind
+        source: /var/snap/docker/common/var-lib-docker/containers
+        target: /var/lib/docker/containers
+        read_only: true
+      - type: bind
+        source: /var/run/docker.sock
+        target: /var/run/docker.sock
+        read_only: true
+      - type: bind
+        source: /var/log
+        target: /var/log
+        read_only: true
+      - type: volume
+        source: filebeat
+        target: /usr/share/filebeat/data/
+    networks:
+      - elk-stack
+    depends_on:
+      - elasticsearch
+
+volumes:
+  elasticsearch:
+  filebeat:
+
+networks:
+  elk-stack:
+    name: elk-stack
+    
