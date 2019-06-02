@@ -79,9 +79,9 @@ services:
 
 volumes:
   jenkins-bootstrap_elasticsearch:
-    extarnal: true
+    external: true
   jenkins-bootstrap_filebeat:
-    extarnal: true
+    external: true
 
 networks:
   elk-stack:
