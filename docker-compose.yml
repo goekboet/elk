@@ -83,7 +83,6 @@ services:
       context: metricbeat
       args:
         ELK_VERSION: $ELK_VERSION
-    network_mode: host
     command: metricbeat --strict.perms=false -e -E output.elasticsearch.hosts=["elasticsearch:9200"]
     volumes: 
       - type: bind
@@ -108,6 +107,7 @@ services:
         read_only: true
     networks:
       - elk-stack
+      - host
     depends_on:
       - elasticsearch
 
@@ -117,5 +117,7 @@ volumes:
 
 networks:
   elk-stack:
+    external: true
+  host:
     external: true
     
