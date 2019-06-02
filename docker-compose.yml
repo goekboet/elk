@@ -77,6 +77,36 @@ services:
     depends_on:
       - elasticsearch
 
+  metricbeat:
+    build: 
+      context: metricbeat
+      args:
+        ELK_VERSION: $ELK_VERSION
+    user: root
+    network_mode: host
+    command: metricbeat -e -E output.elasticsearch.hosts=["elasticsearch:9200"]
+    volumes: 
+      - type: bind
+        source: ./metricbeat/metricbeat.docker.yml
+        target: /usr/share/metricbeat/metricbeat.yml
+        read_only: true
+      - type: bind
+        source: /var/run/docker.sock
+        target: /var/run/docker.sock
+        read_only: true
+      - type: bind
+        source: /sys/fs/cgroup
+        target: /hostfs/sys/fs/cgroup
+        read_only: true
+      - type: bind
+        source: /proc
+        target: /hostfs/proc
+        read_only: true
+      - type: bind
+        source: /
+        target: /hostfs
+        read_only: true
+
 volumes:
   elasticsearch:
   filebeat:
