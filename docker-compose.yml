@@ -13,7 +13,7 @@ services:
         target: /usr/share/elasticsearch/config/elasticsearch.yml
         read_only: true
       - type: volume
-        source: elasticsearch
+        source: jenkins-bootstrap_elasticsearch
         target: /usr/share/elasticsearch/data 
     expose:
       - "9200"
@@ -70,7 +70,7 @@ services:
         target: /var/log
         read_only: true
       - type: volume
-        source: filebeat
+        source: jenkins-bootstrap_filebeat
         target: /usr/share/filebeat/data/
     networks:
       - elk-stack
@@ -78,8 +78,10 @@ services:
       - elasticsearch
 
 volumes:
-  elasticsearch:
-  filebeat:
+  jenkins-bootstrap_elasticsearch:
+    extarnal: true
+  jenkins-bootstrap_filebeat:
+    extarnal: true
 
 networks:
   elk-stack:
