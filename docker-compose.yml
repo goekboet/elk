@@ -78,6 +78,7 @@ services:
       - elasticsearch
 
   metricbeat:
+    user: root
     build: 
       context: metricbeat
       args:
