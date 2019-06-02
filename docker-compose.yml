@@ -106,6 +106,10 @@ services:
         source: /
         target: /hostfs
         read_only: true
+    networks:
+      - elk-stack
+    depends_on:
+      - elasticsearch
 
 volumes:
   elasticsearch:
