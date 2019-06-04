@@ -83,8 +83,12 @@ services:
       context: metricbeat
       args:
         ELK_VERSION: $ELK_VERSION
-    command: metricbeat --strict.perms=false -e -E output.elasticsearch.hosts=["elasticsearch:9200"]
-    volumes: 
+    command: metricbeat --strict.perms=false -e 
+    volumes:
+      - type: bind
+        source: ./metricbeat/ca.pem
+        target: /etc/pki/root/ca.pem
+        read_only: true
       - type: bind
         source: ./metricbeat/metricbeat.docker.yml
         target: /usr/share/metricbeat/metricbeat.yml
@@ -105,8 +109,9 @@ services:
         source: /
         target: /hostfs
         read_only: true
-    networks:
-      - elk-stack
+    network_mode: "host"
+    extra_hosts:
+      - "es.byappt:127.0.0.1"
     depends_on:
       - elasticsearch
 
