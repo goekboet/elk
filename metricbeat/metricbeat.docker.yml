@@ -45,6 +45,6 @@ metricbeat.modules:
 
 
 output.elasticsearch:
-  hosts: ["https://es.byappt"]
+  hosts: ["https://es.byappt:443"]
   ssl.certificate_authorities: ["/etc/pki/root/ca.pem"]
 
