@@ -43,7 +43,6 @@ metricbeat.modules:
   period: 10s
   processes: ['.*']
 
-  output.elasticsearch:
-    hosts: ["https://es.byappt"]
-    ssl.certificate_authorities: ["/etc/pki/root/ca.pem"]
+  output.elasticsearch.hosts: ["https://es.byappt"]
+  output.elasticsearch.ssl.certificate_authorities: ["/etc/pki/root/ca.pem"]
 
