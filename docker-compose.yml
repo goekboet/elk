@@ -83,7 +83,7 @@ services:
       context: metricbeat
       args:
         ELK_VERSION: $ELK_VERSION
-    command: metricbeat --strict.perms=false -e 
+    command: metricbeat --system.hostfs /hostfs --strict.perms=false -e 
     volumes:
       - type: bind
         source: ./metricbeat/ca.pem
