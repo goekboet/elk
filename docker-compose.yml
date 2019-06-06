@@ -1,10 +1,7 @@
 version: '3.7'
 services:
   elasticsearch:
-    build:
-      context: elasticsearch/
-      args:
-        ELK_VERSION: $ELK_VERSION
+      image: docker.elastic.co/elasticsearch/elasticsearch-oss:${ELK_VERSION}
       labels:
         co.elastic.logs/module: "elasticsearch"
     volumes:
@@ -20,13 +17,10 @@ services:
     environment:
       ES_JAVA_OPTS: "-Xmx256m -Xms256m"
     networks:
-      - elk-stack
+      - byappt
 
   kibana:
-    build:
-      context: kibana/
-      args:
-        ELK_VERSION: $ELK_VERSION
+    image: docker.elastic.co/kibana/kibana-oss:${ELK_VERSION}
     labels:
         co.elastic.logs/module: "kibana"
     volumes:
@@ -37,16 +31,13 @@ services:
     expose:
       - "5601"
     networks:
-      - elk-stack
+      - byappt
     depends_on:
       - elasticsearch
 
   filebeat:
     user: root
-    build: 
-      context: filebeat
-      args:
-        ELK_VERSION: $ELK_VERSION
+    image: docker.elastic.co/beats/filebeat-oss:${ELK_VERSION}
     command: filebeat -e -strict.perms=false -E output.elasticsearch.hosts=["elasticsearch:9200"]
     volumes: 
       - type: bind
@@ -58,7 +49,7 @@ services:
         target: /usr/share/filebeat/modules.d
         read_only: true
       - type: bind
-        source: /var/snap/docker/common/var-lib-docker/containers
+        source: /var/lib/docker/containers
         target: /var/lib/docker/containers
         read_only: true
       - type: bind
@@ -73,16 +64,13 @@ services:
         source: filebeat
         target: /usr/share/filebeat/data/
     networks:
-      - elk-stack
+      - byappt
     depends_on:
       - elasticsearch
 
   metricbeat:
     user: root
-    build: 
-      context: metricbeat
-      args:
-        ELK_VERSION: $ELK_VERSION
+    image: docker.elastic.co/beats/metricbeat-oss:${ELK_VERSION}
     command: metricbeat --system.hostfs=/hostfs --strict.perms=false -e 
     volumes:
       - type: bind
@@ -120,6 +108,6 @@ volumes:
   filebeat:
 
 networks:
-  elk-stack:
+  byappt:
     external: true
     
