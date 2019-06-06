@@ -138,5 +138,4 @@ volumes:
 
 networks:
   byappt:
-    external: true
     
