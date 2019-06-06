@@ -104,8 +104,7 @@ services:
       - elasticsearch
 
   nginx:
-    build:
-      context: nginx/
+    image: nginx:1.17
     labels:
         co.elastic.logs/module: "nginx"
         co.elastic.logs/fileset.stdout: "access"
