@@ -1,0 +1,18 @@
+version: "3.7"
+services:
+  setup-filebeat:
+    image: docker.elastic.co/beats/filebeat-oss:${ELK_VERSION}
+    command: setup -E setup.kibana.host=kibana:5601 -E output.elasticsearch.hosts=["elasticsearch:9200"]
+    networks:
+      - byappt
+
+  setup-metricbeat:
+    image: docker.elastic.co/beats/metricbeat-oss:${ELK_VERSION}
+    command: setup -E setup.kibana.host=kibana:5601 -E output.elasticsearch.hosts=["elasticsearch:9200"]
+    networks:
+      - byappt
+
+networks:
+  byappt:
+    external: true
+
