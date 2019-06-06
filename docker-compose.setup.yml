@@ -13,6 +13,6 @@ services:
       - byappt
 
 networks:
-  byappt:
+  elk_byappt:
     external: true
 
