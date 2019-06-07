@@ -38,7 +38,7 @@ services:
   filebeat:
     user: root
     image: docker.elastic.co/beats/filebeat-oss:${ELK_VERSION}
-    command: filebeat -e -strict.perms=false -E output.elasticsearch.hosts=["elasticsearch:9200"]
+    command: filebeat -e -strict.perms=false -E output.elasticsearch.hosts=["elasticsearch:9200"] -E output.elasticsearch.pipeline="geoip-info"
     volumes: 
       - type: bind
         source: ./filebeat/filebeat.docker.yml
