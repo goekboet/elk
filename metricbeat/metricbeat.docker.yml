@@ -43,6 +43,18 @@ metricbeat.modules:
   period: 10s
   processes: ['.*']
 
+- module: nginx
+  metricsets: 
+    - "stubstatus"
+  enabled: true
+  period: 10s
+
+  # Nginx hosts
+  hosts: ["http://localhost"]
+
+  # Path to server status. Default server-status
+  server_status_path: "server-status"
+
 
 output.elasticsearch:
   hosts: ["https://es.byappt:443"]
