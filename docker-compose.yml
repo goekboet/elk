@@ -110,6 +110,8 @@ services:
         co.elastic.logs/module: "nginx"
         co.elastic.logs/fileset.stdout: "access"
         co.elastic.logs/fileset.stderr: "error"
+        co.elastic.metrics/module: "nginx"
+        co.elastic.metrics/hosts: "http://nginx:80"
     volumes: 
       - type: bind
         source: ./nginx/nginx.conf
