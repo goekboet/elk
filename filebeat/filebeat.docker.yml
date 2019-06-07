@@ -8,5 +8,6 @@ filebeat.autodiscover:
     - type: docker
       hints.enabled: true
 
-processors:
-- add_cloud_metadata: ~
+output.elasticsearch:
+  hosts: ["elasticsearch:9200"]
+  pipeline: geoip-info
