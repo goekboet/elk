@@ -10,4 +10,4 @@ filebeat.autodiscover:
 
 output.elasticsearch:
   hosts: ["elasticsearch:9200"]
-  pipeline: geoip-info
+  pipeline: "geoip-info"
