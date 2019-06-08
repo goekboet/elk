@@ -20,7 +20,7 @@ packetbeat.protocols:
   include_additionals: true
 
 - type: http
-  ports: [80, 8080, 8000, 5000, 8002]
+  ports: [80, 9200, 5601]
   hide_keywords: ["pass", "password", "passwd"]
   send_headers: ["User-Agent", "Cookie", "Set-Cookie"]
   split_cookie: true
