@@ -74,7 +74,7 @@ services:
     command: metricbeat --system.hostfs=/hostfs --strict.perms=false -e 
     volumes:
       - type: bind
-        source: ./metricbeat/ca.pem
+        source: ./ca.pem
         target: /etc/pki/root/ca.pem
         read_only: true
       - type: bind
@@ -103,6 +103,27 @@ services:
       - "es.byappt:127.0.0.1"
     depends_on:
       - elasticsearch
+
+  packetbeat:
+    image: docker.elastic.co/beats/packetbeat-oss:${ELK_VERSION}
+    user: packetbeat
+    cap_add: 
+    - NET_RAW
+    - NET_ADMIN
+    network_mode: "host"
+    volumes:
+      - type: bind
+        source: ./ca.pem
+        target: /etc/pki/root/ca.pem
+        read_only: true
+      - type: bind
+        source: ./packetbeat/packetbeat.docker.yml
+        target: /usr/share/packetbeat/packetbeat.yml
+        read_only: true
+    extra_hosts:
+      - "es.byappt:127.0.0.1"
+
+    
 
   nginx:
     image: nginx:1.17

@@ -12,6 +12,13 @@ services:
     networks:
       - elk_byappt
 
+  setup-packetbeat:
+    image: docker.elastic.co/beats/packetbeat-oss:${ELK_VERSION}
+    cap_add: NET_ADMIN
+    command: setup -E setup.kibana.host=kibana:5601 -E output.elasticsearch.hosts=["elasticsearch:9200"]
+    networks:
+      - elk_byappt
+
 networks:
   elk_byappt:
     external: true
