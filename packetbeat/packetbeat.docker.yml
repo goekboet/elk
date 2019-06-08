@@ -1,40 +1,36 @@
 packetbeat.interfaces.device: any
+packetbeat.interfaces.type: af_packet
+packetbeat.interfaces.buffer_size_mb: 100
 
 packetbeat.flows:
   timeout: 30s
   period: 10s
 
-packetbeat.protocols.dns:
+packetbeat.protocols:
+
+- type: icmp
+  enabled: true
+
+- type: dhcpv4
+  ports: [67, 68]
+
+- type: dns
   ports: [53]
   include_authorities: true
   include_additionals: true
 
-packetbeat.protocols.http:
-  ports: [80, 5601, 9200, 8080, 8081, 5000, 8002]
+- type: http
+  ports: [80, 8080, 8000, 5000, 8002]
+  hide_keywords: ["pass", "password", "passwd"]
+  send_headers: ["User-Agent", "Cookie", "Set-Cookie"]
+  split_cookie: true
+  real_ip_header: "X-Forwarded-For"
 
-packetbeat.protocols.memcache:
-  ports: [11211]
-
-packetbeat.protocols.mysql:
-  ports: [3306]
-
-packetbeat.protocols.pgsql:
-  ports: [5432]
-
-packetbeat.protocols.redis:
-  ports: [6379]
-
-packetbeat.protocols.thrift:
-  ports: [9090]
-
-packetbeat.protocols.mongodb:
-  ports: [27017]
-
-packetbeat.protocols.cassandra:
-  ports: [9042]
-
-processors:
-- add_cloud_metadata: ~
+- type: tls
+  ports: [443]
+  send_certificates: true
+  include_raw_certificates: false
+  fingerprints: [ sha1, sha256 ]
 
 output.elasticsearch:
   hosts: ["https://es.byappt:443"]
