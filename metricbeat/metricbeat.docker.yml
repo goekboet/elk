@@ -55,6 +55,28 @@ metricbeat.modules:
   # Path to server status. Default server-status
   server_status_path: "server-status"
 
+- module: elasticsearch
+  metricsets:
+    # - node
+    # - node_stats
+    - index
+    #- index_recovery
+    #- index_summary
+    #- shard
+    #- ml_job
+  period: 10s
+  hosts: ["http://es.byappt:443"]
+  #username: "elastic"
+  #password: "changeme"
+  ssl.certificate_authorities: ["/etc/pki/root/ca.pem"]
+
+  # Set to false to fetch all entries
+  #index_recovery.active_only: true
+
+  # Set to true to send data collected by module to X-Pack
+  # Monitoring instead of metricbeat-* indices.
+  #xpack.enabled: false
+
 
 output.elasticsearch:
   hosts: ["https://es.byappt:443"]
