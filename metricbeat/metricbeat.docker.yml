@@ -65,7 +65,7 @@ metricbeat.modules:
     #- shard
     #- ml_job
   period: 10s
-  hosts: ["http://es.byappt:443"]
+  hosts: ["https://es.byappt:443"]
   #username: "elastic"
   #password: "changeme"
   ssl.certificate_authorities: ["/etc/pki/root/ca.pem"]
