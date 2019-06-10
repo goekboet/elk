@@ -1,0 +1,70 @@
+actions:
+  1:
+    action: delete_filebeat_indices
+    description: >-
+      Delete filebeat indices older than 45 days (based on index name), for logstash-
+      prefixed indices. Ignore the error if the filter does not result in an
+      actionable list of indices (ignore_empty_list) and exit cleanly.
+    options:
+      ignore_empty_list: True
+      timeout_override:
+      continue_if_exception: False
+      disable_action: True
+    filters:
+    - filtertype: pattern
+      kind: prefix
+      value: filebeat-
+      exclude:
+    - filtertype: age
+      source: name
+      direction: older
+      timestring: '%Y.%m.%d'
+      unit: days
+      unit_count: 49
+      exclude:
+  2:
+    action: delete_metricbeat_indices
+    description: >-
+      Delete indices older than 7 days (based on index name), for logstash-
+      prefixed indices. Ignore the error if the filter does not result in an
+      actionable list of indices (ignore_empty_list) and exit cleanly.
+    options:
+      ignore_empty_list: True
+      timeout_override:
+      continue_if_exception: False
+      disable_action: True
+    filters:
+    - filtertype: pattern
+      kind: prefix
+      value: metricbeat-
+      exclude:
+    - filtertype: age
+      source: name
+      direction: older
+      timestring: '%Y.%m.%d'
+      unit: days
+      unit_count: 10
+      exclude:
+  3:
+    action: delete_packetbeat_indices
+    description: >-
+      Delete indices older than 3 days (based on index name), for logstash-
+      prefixed indices. Ignore the error if the filter does not result in an
+      actionable list of indices (ignore_empty_list) and exit cleanly.
+    options:
+      ignore_empty_list: True
+      timeout_override:
+      continue_if_exception: False
+      disable_action: True
+    filters:
+    - filtertype: pattern
+      kind: prefix
+      value: metricbeat-
+      exclude:
+    - filtertype: age
+      source: name
+      direction: older
+      timestring: '%Y.%m.%d'
+      unit: days
+      unit_count: 3
+      exclude:
