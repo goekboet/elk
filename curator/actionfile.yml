@@ -1,6 +1,6 @@
 actions:
   1:
-    action: delete_filebeat_indices
+    action: delete_indices
     description: >-
       Delete filebeat indices older than 45 days (based on index name), for logstash-
       prefixed indices. Ignore the error if the filter does not result in an
@@ -23,7 +23,7 @@ actions:
       unit_count: 49
       exclude:
   2:
-    action: delete_metricbeat_indices
+    action: delete_indices
     description: >-
       Delete indices older than 7 days (based on index name), for logstash-
       prefixed indices. Ignore the error if the filter does not result in an
@@ -46,7 +46,7 @@ actions:
       unit_count: 10
       exclude:
   3:
-    action: delete_packetbeat_indices
+    action: delete_indices
     description: >-
       Delete indices older than 3 days (based on index name), for logstash-
       prefixed indices. Ignore the error if the filter does not result in an
