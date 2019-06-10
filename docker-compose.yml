@@ -127,11 +127,7 @@ services:
     extra_hosts:
       - "es.byappt:127.0.0.1"
 
-  curator:
-    build:
-      context: curator
-    networks:
-      - byappt
+  
 
   nginx:
     image: nginx:1.17
