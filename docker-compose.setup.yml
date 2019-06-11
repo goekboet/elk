@@ -20,11 +20,7 @@ services:
     networks:
       - elk_byappt
 
-  curator:
-    build:
-      context: curator
-    networks:
-      - elk_byappt
+  
 
 networks:
   elk_byappt:
