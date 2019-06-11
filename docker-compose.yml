@@ -131,7 +131,7 @@ services:
     build:
       context: curator
     networks:
-      - elk_byappt
+      - byappt
 
   nginx:
     image: nginx:1.17
