@@ -2,7 +2,7 @@ actions:
   1:
     action: delete_indices
     description: >-
-      Delete filebeat indices older than 45 days.
+      Delete filebeat indices older than 7 days.
     options:
       ignore_empty_list: True
       timeout_override:
@@ -18,12 +18,12 @@ actions:
       direction: older
       timestring: '%Y.%m.%d'
       unit: days
-      unit_count: 49
+      unit_count: 7
       exclude:
   2:
     action: delete_indices
     description: >-
-      Delete metricbeat indices older than 7 days (based on index name).
+      Delete metricbeat indices older than 2 days (based on index name).
     options:
       ignore_empty_list: True
       timeout_override:
@@ -39,12 +39,12 @@ actions:
       direction: older
       timestring: '%Y.%m.%d'
       unit: days
-      unit_count: 10
+      unit_count: 2
       exclude:
   3:
     action: delete_indices
     description: >-
-      Delete packetbeat indices older than 3 days.
+      Delete packetbeat indices older than 1 days.
     options:
       ignore_empty_list: True
       timeout_override:
@@ -53,12 +53,12 @@ actions:
     filters:
     - filtertype: pattern
       kind: prefix
-      value: metricbeat-
+      value: packetbeat-
       exclude:
     - filtertype: age
       source: name
       direction: older
       timestring: '%Y.%m.%d'
       unit: days
-      unit_count: 3
+      unit_count: 1
       exclude:
