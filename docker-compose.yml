@@ -4,7 +4,7 @@ services:
     image: docker.elastic.co/elasticsearch/elasticsearch-oss:${ELK_VERSION}
     labels:
       co.elastic.logs/module: "elasticsearch"
-      co.elastic.logs/processors.decode_json_fields.fields: "["message"]"
+      co.elastic.logs/processors.decode_json_fields.fields: '["message"]'
     volumes:
       - type: bind
         source: ./elasticsearch/config/elasticsearch.yml
