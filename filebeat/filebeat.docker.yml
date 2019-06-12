@@ -8,6 +8,12 @@ filebeat.autodiscover:
     - type: docker
       hints.enabled: true
 
+processors:
+  - decode_json_fields:
+      fields: ["message"]
+      target: ""
+      overwrite_keys: true
+
 output.elasticsearch:
   hosts: ["elasticsearch:9200"]
   pipeline: "geoip-info"
