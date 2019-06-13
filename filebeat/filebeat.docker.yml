@@ -7,7 +7,7 @@ filebeat.autodiscover:
   providers:
     - type: docker
       hints.enabled: true
-      json.message.key: log
+      json.message.key: message
       containers.ids:
         - "${data.docker.container.id}"
       json.keys_under_root: true
