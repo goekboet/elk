@@ -2,6 +2,8 @@ version: "3.7"
 services:
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch-oss:${ELK_VERSION}
+    labels:
+        co.elastic.logs/module: "nginx"
     volumes:
       - type: bind
         source: ./elasticsearch/config/elasticsearch.yml

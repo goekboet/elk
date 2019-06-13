@@ -13,9 +13,6 @@ filebeat.autodiscover:
       json.keys_under_root: true
       json.add_error_key: false
 
-processors:
-  - add_docker_metadata: ~           
-
 output.elasticsearch:
   hosts: ["elasticsearch:9200"]
   pipeline: "geoip-info"
