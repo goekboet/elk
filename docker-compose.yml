@@ -23,8 +23,6 @@ services:
 
   kibana:
     image: docker.elastic.co/kibana/kibana-oss:${ELK_VERSION}
-    labels:
-        co.elastic.logs/module: "kibana"
     volumes:
       - type: bind
         source: ./kibana/config
