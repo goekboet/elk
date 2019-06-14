@@ -7,9 +7,6 @@ filebeat.autodiscover:
   providers:
     - type: docker
       hints.enabled: true
-      json.keys_under_root: true
-      json.add_error_key: true
-      ignore_decoding_error: true
 
 output.elasticsearch:
   hosts: ["elasticsearch:9200"]
