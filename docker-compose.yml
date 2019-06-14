@@ -26,7 +26,8 @@ services:
   kibana:
     image: docker.elastic.co/kibana/kibana-oss:${ELK_VERSION}
     labels:
-        co.elastic.logs/module: "kibana"
+        co.elastic.logs/processors.decode_json_fields.fields: '["log"]'
+        co.elastic.logs/processors.decode_json_fields.overwrite_keys: true 
     volumes:
       - type: bind
         source: ./kibana/config
@@ -130,6 +131,9 @@ services:
   curator:
     build:
       context: curator
+    labels:
+        co.elastic.logs/processors.decode_json_fields.fields: '["log"]'
+        co.elastic.logs/processors.decode_json_fields.overwrite_keys: true  
     networks:
       - byappt
 
