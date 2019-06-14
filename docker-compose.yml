@@ -26,7 +26,7 @@ services:
   kibana:
     image: docker.elastic.co/kibana/kibana-oss:${ELK_VERSION}
     labels:
-        co.elastic.logs/processors.decode_json_fields.fields: "logs"
+        co.elastic.logs/processors.decode_json_fields.fields: '["logs"]'
     volumes:
       - type: bind
         source: ./kibana/config
