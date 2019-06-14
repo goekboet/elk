@@ -9,7 +9,6 @@ filebeat.autodiscover:
       hints.enabled: true
       json.keys_under_root: true
       json.add_error_key: true
-      json.message_key: log
 
 output.elasticsearch:
   hosts: ["elasticsearch:9200"]
