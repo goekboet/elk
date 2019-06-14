@@ -8,13 +8,12 @@ filebeat.autodiscover:
     - type: docker
       hints.enabled: true
 
-filebeat.inputs:
-- type: docker
-  containers.ids: 
-    - '*'
-  json.keys_under_root: true
-  json.add_error_key: true
-  json.message_key: log
+# filebeat.inputs:
+# - type: docker
+#   containers.ids: 
+#     - '*'
+#   json.keys_under_root: true
+#   json.add_error_key: true
 
 output.elasticsearch:
   hosts: ["elasticsearch:9200"]
