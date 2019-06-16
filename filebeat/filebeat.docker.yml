@@ -27,6 +27,21 @@ filebeat.autodiscover:
                   type: docker
                   containers.ids:
                     - "${data.docker.container.id}"
+              gc:
+                input:
+                  type: docker
+                  containers.ids:
+                    - "${data.docker.container.id}"
+        - condition:
+            contains:
+              docker.container.image: kibana-oss
+          config:
+            - module: kibana
+              log:
+                input:
+                  type: docker
+                  containers.ids:
+                    - "${data.docker.container.id}"
 
 output.elasticsearch:
   hosts: ["elasticsearch:9200"]

@@ -12,7 +12,7 @@
     #var.convert_timezone: false
 
   gc:
-    enabled: false
+    enabled: true
     # Set custom paths for the log files. If left empty,
     # Filebeat will choose the paths depending on your OS.
     #var.paths:
