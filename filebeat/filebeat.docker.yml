@@ -6,7 +6,27 @@ filebeat.config:
 filebeat.autodiscover:
   providers:
     - type: docker
-      hints.enabled: true
+      json.message_key: log  
+      templates:
+        - condition:
+            equals:
+              docker.container.labels.json_logger: "True"
+          config:
+            - type: docker
+              containers.ids:
+                - "${data.docker.container.id}"
+              json.keys_under_root: true
+              json.add_error_key: true
+        - condition:
+            contains:
+              docker.container.image: elasticsearch-oss
+          config:
+            - module: elasticsearch
+              log:
+                input:
+                  type: docker
+                  containers.ids:
+                    - "${data.docker.container.id}"
 
 output.elasticsearch:
   hosts: ["elasticsearch:9200"]
