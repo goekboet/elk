@@ -7,7 +7,6 @@ filebeat.autodiscover:
   providers:
     - type: docker
       json.message_key: log
-      hints.enabled: true 
       templates:
         - condition:
             equals:
@@ -23,7 +22,7 @@ filebeat.autodiscover:
               docker.container.image: elasticsearch-oss
           config:
             - module: elasticsearch
-              log:
+              server:
                 input:
                   type: docker
                   containers.ids:

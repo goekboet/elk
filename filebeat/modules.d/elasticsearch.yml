@@ -12,13 +12,13 @@
     #var.convert_timezone: false
 
   gc:
-    enabled: true
+    enabled: false
     # Set custom paths for the log files. If left empty,
     # Filebeat will choose the paths depending on your OS.
     #var.paths:
 
   audit:
-    enabled: true
+    enabled: false
     # Set custom paths for the log files. If left empty,
     # Filebeat will choose the paths depending on your OS.
     #var.paths:
@@ -27,7 +27,7 @@
     #var.convert_timezone: false
 
   slowlog:
-    enabled: true
+    enabled: false
     # Set custom paths for the log files. If left empty,
     # Filebeat will choose the paths depending on your OS.
     #var.paths:
@@ -36,7 +36,7 @@
     #var.convert_timezone: false
 
   deprecation:
-    enabled: true
+    enabled: false
     # Set custom paths for the log files. If left empty,
     # Filebeat will choose the paths depending on your OS.
     #var.paths:
