@@ -6,7 +6,7 @@ filebeat.config:
 filebeat.autodiscover:
   providers:
     - type: docker
-      hints.enabled: true
+      hints.enabled: false
       json.message_key: log
       templates:
         - condition:
@@ -39,6 +39,21 @@ filebeat.autodiscover:
           config:
             - module: kibana
               log:
+                input:
+                  type: docker
+                  containers.ids:
+                    - "${data.docker.container.id}"
+        - condition:
+            contains:
+              docker.container.image: nginx
+          config:
+            - module: nginx
+              access:
+                input:
+                  type: docker
+                  containers.ids:
+                    - "${data.docker.container.id}"
+              error:
                 input:
                   type: docker
                   containers.ids:

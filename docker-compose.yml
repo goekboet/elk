@@ -135,10 +135,10 @@ services:
 
   nginx:
     image: nginx:1.17
-    labels:
-        co.elastic.logs/module: "nginx"
-        co.elastic.logs/fileset.stdout: "access"
-        co.elastic.logs/fileset.stderr: "error"
+    # labels:
+    #     co.elastic.logs/module: "nginx"
+    #     co.elastic.logs/fileset.stdout: "access"
+    #     co.elastic.logs/fileset.stderr: "error"
     volumes: 
       - type: bind
         source: ./nginx/nginx.conf
