@@ -53,11 +53,13 @@ filebeat.autodiscover:
                   type: docker
                   containers.ids:
                     - "${data.docker.container.id}"
+                  containers.stream: stdout
               error:
                 input:
                   type: docker
                   containers.ids:
                     - "${data.docker.container.id}"
+                  containers.stream: stderr
 
 output.elasticsearch:
   hosts: ["elasticsearch:9200"]
