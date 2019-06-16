@@ -6,6 +6,7 @@ filebeat.config:
 filebeat.autodiscover:
   providers:
     - type: docker
+      hints.enabled: true
       json.message_key: log
       templates:
         - condition:
