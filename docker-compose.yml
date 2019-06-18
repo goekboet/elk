@@ -20,6 +20,7 @@ services:
       memlock:
         soft: -1
         hard: -1
+    restart: always
     networks:
       - byappt
 
@@ -32,6 +33,7 @@ services:
         read_only: true
     expose:
       - "5601"
+    restart: always
     networks:
       - byappt
     depends_on:
@@ -65,6 +67,7 @@ services:
       - type: volume
         source: filebeat
         target: /usr/share/filebeat/data/
+    restart: always
     networks:
       - byappt
     depends_on:
@@ -99,6 +102,7 @@ services:
         source: /
         target: /hostfs
         read_only: true
+    restart: always
     network_mode: "host"
     privileged: true
     extra_hosts:
@@ -112,6 +116,7 @@ services:
     cap_add: 
     - NET_RAW
     - NET_ADMIN
+    restart: always
     network_mode: "host"
     volumes:
       - type: bind
@@ -129,16 +134,13 @@ services:
     build:
       context: curator
     labels:
-      json_logger: true  
+      json_logger: true 
+    restart: always 
     networks:
       - byappt
 
   nginx:
     image: nginx:1.17
-    # labels:
-    #     co.elastic.logs/module: "nginx"
-    #     co.elastic.logs/fileset.stdout: "access"
-    #     co.elastic.logs/fileset.stderr: "error"
     volumes: 
       - type: bind
         source: ./nginx/nginx.conf
@@ -152,6 +154,7 @@ services:
         source: ./nginx/sites-enabled
         target: /etc/nginx/sites-enabled
         read_only: true
+    restart: always
     networks:
       - byappt
     ports:
