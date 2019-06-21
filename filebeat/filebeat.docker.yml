@@ -67,10 +67,10 @@ filebeat.autodiscover:
             - type: docker
               containers.ids:
                 - "${data.docker.container.id}"
-              processors:
-                - dissect:
-                    tokenizer: "%{?year} %{?time} [id=%{id}]\t%{level}\t%{logger}#%{event}: %{message}"
-                    target_prefix: ""
+              # processors:
+              #   - dissect:
+              #       tokenizer: "%{?year} %{?time} [id=%{id}]\t%{level}\t%{logger}#%{event}: %{message}"
+              #       target_prefix: ""
 
 output.elasticsearch:
   hosts: ["elasticsearch:9200"]
