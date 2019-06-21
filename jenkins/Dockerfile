@@ -1,4 +1,4 @@
-FROM jenkins/jenkinsci/blueocean:1.17.0
+FROM jenkinsci/blueocean:1.17.0
 ENV DOCKERVERSION=18.06.6-ce
 USER root
 
