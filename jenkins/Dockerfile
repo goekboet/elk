@@ -1,5 +1,5 @@
 FROM jenkinsci/blueocean:1.17.0
-ENV DOCKERVERSION=18.09.6-ce
+ENV DOCKERVERSION=18.09.6
 USER root
 
 RUN curl -fsSLO https://download.docker.com/linux/static/stable/x86_64/docker-${DOCKERVERSION}.tgz \
