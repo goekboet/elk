@@ -62,7 +62,7 @@ filebeat.autodiscover:
                   containers.stream: stderr
         - condition:
             contains:
-              docker.container.image: jenkins
+              docker.container.image: elk_jenkins
           config:
             - type: docker
               containers.ids:
