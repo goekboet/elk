@@ -139,6 +139,23 @@ services:
     networks:
       - byappt
 
+  jenkins:
+    build:
+      context: jenkins
+    user: root
+    expose: 
+      - "8080"
+    volumes:
+    - type: volume
+      source: jenkins_home
+      target: /var/jenkins_home
+    - type: bind
+      source: /var/run/docker.sock
+      target: /var/run/docker.sock
+      read_only: true
+    networks:
+      - byappt
+
   nginx:
     image: nginx:1.17
     volumes: 
@@ -167,6 +184,7 @@ services:
 volumes:
   elasticsearch:
   filebeat:
+  jenkins_home:
 
 networks:
   byappt:
