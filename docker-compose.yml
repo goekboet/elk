@@ -153,6 +153,7 @@ services:
       source: /var/run/docker.sock
       target: /var/run/docker.sock
       read_only: true
+    restart: always
     networks:
       - byappt
 
