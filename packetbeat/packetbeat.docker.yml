@@ -32,6 +32,9 @@ packetbeat.protocols:
   include_raw_certificates: false
   fingerprints: [ sha1, sha256 ]
 
+- type: pgsql
+  ports: [5432]
+
 output.elasticsearch:
   hosts: ["https://es.byappt:443"]
   pipeline: geoip-info

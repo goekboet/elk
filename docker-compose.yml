@@ -202,8 +202,8 @@ services:
     - type: volume
       source: postgres
       target: /var/lib/postgresql/data
-    expose:
-      - "5432"
+    ports:
+      - "5432:5432"
     networks:
       - byappt
     restart: always
