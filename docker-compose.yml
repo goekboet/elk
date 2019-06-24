@@ -181,11 +181,38 @@ services:
     depends_on:
       - kibana
       - elasticsearch
+  
+  pgres_monitor:
+    image: docker.elastic.co/beats/metricbeat-oss:${ELK_VERSION}
+    command: metricbeat --strict.perms=false -e 
+    volumes:
+      - type: bind
+        source: ./pgres_monitor/metricbeat.docker.yml
+        target: /usr/share/metricbeat/metricbeat.yml
+        read_only: true
+    networks:
+      - byappt
+    restart: always
+
+  postgres:
+    image: postgres:${PGRES_VERSION}
+    environment:
+      POSTGRES_PASSWORD: postgres
+    volumes:
+    - type: volume
+      source: postgres
+      target: /var/lib/postgresql/data
+    expose:
+      - "5432"
+    networks:
+      - byappt
+    restart: always
 
 volumes:
   elasticsearch:
   filebeat:
   jenkins_home:
+  postgres:
 
 networks:
   byappt:

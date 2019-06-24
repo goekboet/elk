@@ -71,6 +71,16 @@ filebeat.autodiscover:
               #   - dissect:
               #       tokenizer: "%{?year} %{?time} [id=%{id}]\t%{level}\t%{logger}#%{event}: %{message}"
               #       target_prefix: ""
+        - condition:
+            contains:
+              docker.container.image: postgres
+          config:
+            - module: postgresql
+              log:
+                input:
+                  type: docker
+                  containers.ids:
+                    - "${data.docker.container.id}"
 
 output.elasticsearch:
   hosts: ["elasticsearch:9200"]
