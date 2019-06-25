@@ -196,7 +196,6 @@ services:
 
   postgres:
     image: postgres:${PGRES_VERSION}
-    command: ["-c", "log_duration=true", "-c", "log_statement=all"]
     environment:
       POSTGRES_PASSWORD: postgres
     volumes:
