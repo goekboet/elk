@@ -184,10 +184,12 @@ services:
   
   pgres_monitor:
     image: docker.elastic.co/beats/metricbeat-oss:${ELK_VERSION}
-    command: metricbeat --strict.perms=false -e 
+    command: metricbeat --strict.perms=false -e
+    env_file:
+      - ../secrets/pgres_monitor.env
     volumes:
       - type: bind
-        source: ./pgres_monitor/metricbeat.docker.yml
+        source: ./postgres/metricbeat.docker.yml
         target: /usr/share/metricbeat/metricbeat.yml
         read_only: true
     networks:
@@ -197,8 +199,9 @@ services:
   postgres:
     image: postgres:${PGRES_VERSION}
     command: ["-c", "log_min_duration_statement=0", "-c", "log_line_prefix=%m [%p] %u@%d "]
-    environment:
-      POSTGRES_PASSWORD: postgres
+    env_file:
+      - ../secrets/pgres_root.env
+      - ../secrets/pgres_monitor.env
     volumes:
     - type: volume
       source: postgres
