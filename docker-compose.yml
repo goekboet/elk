@@ -209,7 +209,7 @@ services:
       source: postgres
       target: /var/lib/postgresql/data
     - type: bind
-      source: .postgres/pgmonitor.sh
+      source: ./postgres/pgmonitor.sh
       target: /docker-entrypoint-initdb.d/pgmonitor.sh
       read_only: true
     ports:
