@@ -12,8 +12,8 @@ services:
       - type: volume
         source: elasticsearch
         target: /usr/share/elasticsearch/data 
-    expose:
-      - "9200"
+    ports:
+      - "9200:9200"
     environment:
       ES_JAVA_OPTS: "-Xmx256m -Xms256m"
     ulimits:
@@ -105,8 +105,6 @@ services:
     restart: always
     network_mode: "host"
     privileged: true
-    extra_hosts:
-      - "es.byappt:127.0.0.1"
     depends_on:
       - elasticsearch
 
@@ -127,8 +125,6 @@ services:
         source: ./packetbeat/packetbeat.docker.yml
         target: /usr/share/packetbeat/packetbeat.yml
         read_only: true
-    extra_hosts:
-      - "es.byappt:127.0.0.1"
 
   curator:
     build:

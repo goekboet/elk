@@ -65,10 +65,9 @@ metricbeat.modules:
     #- shard
     #- ml_job
   period: 10s
-  hosts: ["https://es.byappt:443"]
+  hosts: ["http://localhost:9200"]
   #username: "elastic"
   #password: "changeme"
-  ssl.certificate_authorities: ["/etc/pki/root/ca.pem"]
 
   # Set to false to fetch all entries
   #index_recovery.active_only: true
@@ -79,7 +78,7 @@ metricbeat.modules:
 
 
 output.elasticsearch:
-  hosts: ["https://es.byappt:443"]
+  hosts: ["http://localhost:9200"]
   pipeline: geoip-info
   ssl.certificate_authorities: ["/etc/pki/root/ca.pem"]
 
