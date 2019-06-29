@@ -80,5 +80,4 @@ metricbeat.modules:
 output.elasticsearch:
   hosts: ["http://localhost:9200"]
   pipeline: geoip-info
-  ssl.certificate_authorities: ["/etc/pki/root/ca.pem"]
 
