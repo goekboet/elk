@@ -13,9 +13,8 @@ if [ -z "$MONITOR_PWD" ]; then
     exit 1
 fi
 
-export PGUSER=postgres
-export PGPASSWORD=postgres
-#export PGHOST=postgres
+export PGUSER=$POSTGRES_USER
+export PGPASSWORD=$POSTGRES_PASSWORD
 
 RUN_ON_MYDB="psql -X --set ON_ERROR_STOP=on"
 

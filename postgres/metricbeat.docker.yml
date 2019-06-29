@@ -22,7 +22,7 @@ metricbeat.modules:
   # postgres://localhost:5432?sslmode=disable
   # The available parameters are documented here:
   # https://godoc.org/github.com/lib/pq#hdr-Connection_String_Parameters
-  hosts: ["postgres://postgres:postgres@postgres?sslmode=disable"]
+  hosts: ["postgres://${MONITOR_USR}:${MONITOR_PWD}@postgres?sslmode=disable"]
 
 
 output.elasticsearch:
