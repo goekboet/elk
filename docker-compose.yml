@@ -79,10 +79,6 @@ services:
     command: metricbeat --system.hostfs=/hostfs --strict.perms=false -e 
     volumes:
       - type: bind
-        source: ./ca.pem
-        target: /etc/pki/root/ca.pem
-        read_only: true
-      - type: bind
         source: ./metricbeat/metricbeat.docker.yml
         target: /usr/share/metricbeat/metricbeat.yml
         read_only: true
@@ -117,10 +113,6 @@ services:
     restart: always
     network_mode: "host"
     volumes:
-      - type: bind
-        source: ./ca.pem
-        target: /etc/pki/root/ca.pem
-        read_only: true
       - type: bind
         source: ./packetbeat/packetbeat.docker.yml
         target: /usr/share/packetbeat/packetbeat.yml
